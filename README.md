@@ -2,7 +2,9 @@
 This repository is the official implementation of **GLEM**.
 
 ## Overview
-  
+
+  <img src="Model.pdf" width="100%" height="100%">
+
 ## Training
 Please look the details in Readme.md of each dataset inside the corresponding folder.
 

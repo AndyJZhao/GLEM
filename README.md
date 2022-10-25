@@ -3,7 +3,7 @@ This repository is the official implementation of **GLEM**.
 
 ## Overview
 
-  <img src="Framework.jpg" width="100%" height="100%">
+  <img src="Framework.jpg" width="80%" height="80%">
 
 ## Training
 Please look the details in Readme.md of each dataset inside the corresponding folder.

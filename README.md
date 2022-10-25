@@ -36,44 +36,4 @@ Performance on **ogbn-products**(10 runs):
 Our paper:
 ```
 ```
-
-GIANT paper:
-```
-@article{chien2021node,
-  title={Node Feature Extraction by Self-Supervised Multi-scale Neighborhood Prediction},
-  author={Eli Chien and Wei-Cheng Chang and Cho-Jui Hsieh and Hsiang-Fu Yu and Jiong Zhang and Olgica Milenkovic and Inderjit S Dhillon},
-  journal={arXiv preprint arXiv:2111.00064},
-  year={2021}
-}
-```
-GAMLP paper:
-```
-@article{zhang2021graph,
-  title={Graph attention multi-layer perceptron},
-  author={Zhang, Wentao and Yin, Ziqi and Sheng, Zeang and Ouyang, Wen and Li, Xiaosen and Tao, Yangyu and Yang, Zhi and Cui, Bin},
-  journal={arXiv preprint arXiv:2108.10097},
-  year={2021}
-}
-```
-SAGN paper:
-
-```
-@article{sun2021scalable,
-  title={Scalable and Adaptive Graph Neural Networks with Self-Label-Enhanced training},
-  author={Sun, Chuxiong and Wu, Guoshi},
-  journal={arXiv preprint arXiv:2104.09376},
-  year={2021}
-}
-```
-
-C&S paper:
-```
-@inproceedings{
-huang2021combining,
-title={Combining Label Propagation and Simple Models out-performs Graph Neural Networks},
-author={Qian Huang and Horace He and Abhay Singh and Ser-Nam Lim and Austin Benson},
-booktitle={International Conference on Learning Representations},
-year={2021},
-url={https://openreview.net/forum?id=8E1-f3VhX1o}
-}
-```
+The different models used for different datasets are referenced in the corresponding OGB subfolders

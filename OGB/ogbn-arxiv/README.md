@@ -26,7 +26,7 @@ The `inf_n_epochs` controls the number of iterations of the `EM-Step`, which on 
 For **ogbn-arxiv**
 For the seed=0:
 ``` 
-python src/models/GraphVF/trainGVF.py 
+python src/models/GraphVF/trainGVF.py --dataset=arxiv_TA --em_order=LM-first --gnn_early_stop=300 --gnn_epochs=500 --gnn_input_norm=F --gnn_label_input=F --gnn_label_num_hops=5 --gnn_model=GAMLP --gnn_n_hidden=256 --gnn_num_hops=3 --gnn_pl_ratio=0.1 --gnn_pl_weight=0.05 --inf_n_epochs=2 --inf_tr_n_nodes=100000 --lm_ce_reduction=mean --lm_cla_dropout=0.4 --lm_epochs=1 --lm_eq_batch_size=30 --lm_eval_patience=30460 --lm_init_ckpt=EM --lm_label_smoothing_factor=0 --lm_load_best_model_at_end=T --lm_lr=3e-05 --lm_model=Deberta --lm_pl_ratio=0.5 --lm_pl_weight=0.8 --pseudo_temp=0.2 --seed=0  --gpus=0
 ```
 ### GLEM+GCN
 For **ogbn-arxiv**

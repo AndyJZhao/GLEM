@@ -2,11 +2,19 @@
 This repository is the official implementation of **GLEM**.
 
 ## Overview
+The proposed GLEM framework trains GNN and LM separately in a variational EM
+framework: In E-step, an LM is trained towards predicting both the gold and GNN predicted pseudolabels; In M-step, a GNN is trained by predicting LM-inferenced pseudo-labels using the embeddings and labels predicted by LM.
+  
+<img src="Framework.jpg" width="80%" height="80%">
 
-  <img src="Framework.jpg" width="80%" height="80%">
+## Requirements
+We use the miniconda to manage the python environment. We provide the environment.yaml to implement the environment
+```
+conda env create -f environment.yml
+```
 
 ## Training
-Please look the details in Readme.md of each dataset inside the corresponding folder.
+Please look the details in Readme.md of each dataset inside the OGB folder.
 
 ## Node Classification Results:
 

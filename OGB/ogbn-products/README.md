@@ -12,8 +12,18 @@ Implementing environment: Tesla V100 32GB (GPU)
 - pytorch=1.10.2
 - pyg=2.0.3
 
+For the `GLEM+EnGCN`, you will need to implement some special library in the [EnGCN](https://github.com/VITA-Group/Large_Scale_GCN_Benchmarking)
 
 ## Training
+In the learning process of the LM model, we turn on fp16 during the training and eval process in order to improve the learning speed; 
+In order to obtain better results, we can turn off fp16 and adjust the corresponding batchsize during the pre-training process of LM.
+
+### GLEM+EnGCN
+For **ogbn-products**
+
+First step:
+
+
 
 ### GLEM+GIANT+SAGN+SCR
 For **ogbn-products**
@@ -40,7 +50,8 @@ python src/models/GraphVF/trainGVF.py
 Performance on **ogbn-products**(10 runs):
 | Methods   | Validation accuracy  | Test accuracy  |
 |  ----  | ----  |  ---- |
-| GLEM+GIANT+SAGN+SCR |0.9400 ± 0.0003 | 0.8736 ± 0.0007 |
+| GLEM+EnGCN|0.9326 ± 0.0009 | 0.8986 ± 0.0006 |
+| GLEM+GIANT+SAGN+SCR |0.9400 ± 0.0003 | 0.8737 ± 0.0006 |
 
 ## Citation
 EnGCN paper:
@@ -52,7 +63,6 @@ EnGCN paper:
   year={2022}
 }
 ```
-
 
 SCR paper:
 ```

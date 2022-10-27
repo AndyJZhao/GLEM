@@ -14,6 +14,9 @@ Implementing environment: Tesla V100 32GB (GPU)
 
 
 ## Training
+In the learning process of the LM model, we turn on fp16 during the training and eval process in order to improve the learning speed; 
+In order to obtain better results, we can turn off fp16 and adjust the corresponding batchsize during the pre-training process of LM.
+
 ### GLEM+RevGAT
 For **ogbn-arxiv**
 For the seed=0:

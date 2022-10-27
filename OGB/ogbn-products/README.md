@@ -15,7 +15,7 @@ Implementing environment: Tesla V100 32GB (GPU)
 
 ## Training
 
-### GLEM+GAMLP
+### GLEM+GIANT+SAGN+SCR
 For **ogbn-products**
 We first run the `GIANT+SAGN+SCR` model and save the prediction from it.
 Please follow the instruction in [SCR](https://github.com/THUDM/SCR/tree/main/ogbn-products) to get the preds.
@@ -43,13 +43,43 @@ Performance on **ogbn-products**(10 runs):
 | GLEM+GIANT+SAGN+SCR |0.9400 ± 0.0003 | 0.8736 ± 0.0007 |
 
 ## Citation
-
-GAMLP paper:
+EnGCN paper:
 ```
-@article{zhang2021graph,
-  title={Graph attention multi-layer perceptron},
-  author={Zhang, Wentao and Yin, Ziqi and Sheng, Zeang and Ouyang, Wen and Li, Xiaosen and Tao, Yangyu and Yang, Zhi and Cui, Bin},
-  journal={arXiv preprint arXiv:2108.10097},
+@article{duan2022comprehensive,
+  title={A Comprehensive Study on Large-Scale Graph Training: Benchmarking and Rethinking},
+  author={Duan, Keyu and Liu, Zirui and Wang, Peihao and Zheng, Wenqing and Zhou, Kaixiong and Chen, Tianlong and Hu, Xia and Wang, Zhangyang},
+  journal={arXiv preprint arXiv:2210.07494},
+  year={2022}
+}
+```
+
+
+SCR paper:
+```
+@misc{zhang2021improving,
+      title={Improving the Training of Graph Neural Networks with Consistency Regularization}, 
+      author={Chenhui Zhang and Yufei He and Yukuo Cen and Zhenyu Hou and Jie Tang},
+      year={2021},
+      eprint={2112.04319},
+      archivePrefix={arXiv},
+      primaryClass={cs.SI}
+}
+```
+GIANT paper:
+```
+@article{chien2021node,
+  title={Node Feature Extraction by Self-Supervised Multi-scale Neighborhood Prediction},
+  author={Eli Chien and Wei-Cheng Chang and Cho-Jui Hsieh and Hsiang-Fu Yu and Jiong Zhang and Olgica Milenkovic and Inderjit S Dhillon},
+  journal={arXiv preprint arXiv:2111.00064},
+  year={2021}
+}
+```
+SAGN paper:
+```
+@article{sun2021scalable,
+  title={Scalable and Adaptive Graph Neural Networks with Self-Label-Enhanced training},
+  author={Sun, Chuxiong and Wu, Guoshi},
+  journal={arXiv preprint arXiv:2104.09376},
   year={2021}
 }
 ```

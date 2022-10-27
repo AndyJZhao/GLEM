@@ -57,7 +57,7 @@ class BertEmbInfModel(PreTrainedModel):
         outputs = self.bert_encoder(**input, output_hidden_states=True)
         emb = outputs['hidden_states'][-1]  # Last layer
         # Use CLS Emb as sentence emb.
-        # TODO: Check LN
+
         node_cls_emb = emb.permute(1, 0, 2)[0]
         return TokenClassifierOutput(logits=node_cls_emb)
 

@@ -100,7 +100,7 @@ class GraphVFConfig(ModelConfig):
 
     @property
     def model_cf_str(self):
-        return f'CR{self._model.f_prefix}_GNN{self.gnn.f_prefix}/LM{self.lm.f_prefix}'
+        return f'seed{self.seed}CR{self._model.f_prefix}_GNN{self.gnn.f_prefix}/LM{self.lm.f_prefix}'
 
     # *  <<<<<<<<<<<<<<<<<<<< MISC >>>>>>>>>>>>>>>>>>>>
     def parse_args(self):

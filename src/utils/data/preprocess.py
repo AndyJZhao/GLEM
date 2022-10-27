@@ -84,7 +84,7 @@ def tokenize_graph(cf):
 
 
 def process_graph_structure(g, cf):
-    # Fixme, check whether it is correct
+
     a = time.time()
     g = dgl.to_bidirected(g)
     g_info = cf.data.gi

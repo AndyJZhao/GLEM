@@ -70,7 +70,7 @@ def _load_ogb_products(d, labels):
                     title = []
                     for line in file_in.readlines():
                         dic = json.loads(line)
-                        # TODO Check correctness
+
                         dic['title'] = dic['title'].strip("\"\n")
                         title.append(dic)
                     name_attribute = ["uid", "title", "content"]

@@ -57,10 +57,10 @@ def load_graph_and_supervision(cf):
         is_gold = np.zeros((g.num_nodes()), dtype=bool)
         is_gold[split_idx['train'].numpy()] = True
         d.save_g_info(data={'labels': labels, 'is_gold': is_gold})
-    # Fixme, check whether it is correct
+
     if d.ogb_name not in {'ogbn-papers100M'}:
         g = dgl.to_bidirected(g)
-    # ！Fixme if 'RevGAT' add self-loop
+
     if cf.model in {'RevGAT'}:
         # add self-loop
         print(f"Using GAT based methods,total edges before adding self-loop {g.number_of_edges()}")

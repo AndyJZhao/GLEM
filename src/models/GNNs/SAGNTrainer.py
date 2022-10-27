@@ -55,7 +55,7 @@ class SAGN_Trainer():
             trainable_params = sum(
                 p.numel() for p in self.model.parameters() if p.requires_grad
             )
-            print(f'GNN Phase, trainable_params are {trainable_params}')
+            print(f'!!!!!GNN Phase, trainable_params are {trainable_params}')
             # self.model = self.model.to(cf.device)
             if cf.mean_teacher == True:
                 print("use teacher-SAGN")
@@ -75,8 +75,6 @@ class SAGN_Trainer():
 
         # 准备loader，用于每个epoch中
         self.train_loader = th.utils.data.DataLoader(self.train_x, batch_size=cf.batch_size, shuffle=True, drop_last=False)
-        self.aug_train_loader = th.utils.data.DataLoader(range(self.d.n_nodes), batch_size=cf.batch_size, shuffle=True,
-                                                     drop_last=False)
         pl_bsz = int(cf.batch_size * cf.pl_ratio)
         self.pl_loader = th.utils.data.DataLoader(self.d.pl_nodes, batch_size=pl_bsz, drop_last=False, num_workers=1, pin_memory=True)
         # self.aug_train_loader = th.utils.data.DataLoader(range(self.d.n_nodes), batch_size=cf.batch_size, shuffle=True,
@@ -107,13 +105,16 @@ class SAGN_Trainer():
         iter_num = 0
         y_true = []
         y_pred = []
-        for batch in self.aug_train_loader if self.cf.is_augmented else self.train_loader:
+        #for batch in self.aug_train_loader if self.cf.is_augmented else self.train_loader:
+        for batch_data in zip(self.train_loader, self.pl_loader):
+            batch, pl_nodes = batch_data
+            if self.cf.is_augmented:
+                batch = th.cat([batch, pl_nodes])
             batch_feats = self._get_batch_feat_train(batch)
             if self.label_emb is not None:
                 batch_label_emb = self.label_emb[batch].to(self.cf.device)
             else:
                 batch_label_emb = None
-
             output_att, _ = self.model(batch_feats, batch_label_emb)
             y_pred.append(output_att.argmax(dim=-1, keepdim=True).cpu())  #
             if self.cf.is_augmented and self.cf.pl_ratio > 0:

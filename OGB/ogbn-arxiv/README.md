@@ -41,7 +41,7 @@ python src/models/GraphVF/trainGVF.py --dataset=arxiv_TA --em_order=GNN-first --
 Performance on **ogbn-arxiv**(10 runs):
 | Methods   | Validation accuracy  | Test accuracy  |
 |  ----  | ----  |  ---- |
-| GLEM+RevGAT|0.7749 ± 0.0017 | 0.7697± 0.0019 |
+| GLEM+RevGAT|0.7746 ± 0.0018 | 0.7694± 0.0025 |
 | GLEM+GAMLP |0.7695 ± 0.0014 | 0.7562± 0.0023 |
 | GLEM+GCN   |0.7686 ± 0.0019 | 0.7593± 0.0019 |
 

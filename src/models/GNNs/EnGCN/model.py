@@ -1,9 +1,10 @@
 import torch.nn.functional as F
 from torch import nn
+import torch as th
 from torch.nn import BatchNorm1d, Linear
 from torch.utils.data import DataLoader
 
-class EnGCN(torch.nn.Module):
+class EnGCN(nn.Module):
     def __init__(self, num_feats, dim_hidden, num_classes, num_mlp_layers=3, dropout=0.2,
                  use_batch_norm=True, num_heads=1, use_label_mlp=True):
 
@@ -34,7 +35,7 @@ class EnGCN(torch.nn.Module):
             out += self.label_mlp(y).mean(1)
         return out
 
-    @torch.no_grad()
+    @th.no_grad()
     def inference(self, x, y_emb, device, use_label_mlp):
         self.eval()
         loader = DataLoader(range(x.size(0)), batch_size=100000)
@@ -42,15 +43,15 @@ class EnGCN(torch.nn.Module):
         for perm in loader:
             out = self(x[perm].to(device), y_emb[perm].to(device), use_label_mlp)
             outs.append(out.cpu())
-        return torch.cat(outs, dim=0)
+        return th.cat(outs, dim=0)
 
-class Inner_MLP(torch.nn.Module):
+class Inner_MLP(th.nn.Module):
     def __init__(
         self, in_dim, hidden_dim, out_dim, num_layers, dropout, use_batch_norm
     ):
         super(Inner_MLP, self).__init__()
-        self.linear_list = torch.nn.ModuleList()
-        self.batch_norm_list = torch.nn.ModuleList()
+        self.linear_list = th.nn.ModuleList()
+        self.batch_norm_list = th.nn.ModuleList()
         self.dropout = dropout
         self.num_layers = num_layers
         self.use_batch_norm = use_batch_norm
@@ -77,10 +78,10 @@ class MultiHeadLinear(nn.Module):
     def __init__(self, in_feats, out_feats, n_heads, bias=True):
         super().__init__()
         self.weight = nn.Parameter(
-            torch.FloatTensor(size=(n_heads, in_feats, out_feats))
+            th.FloatTensor(size=(n_heads, in_feats, out_feats))
         )
         if bias:
-            self.bias = nn.Parameter(torch.FloatTensor(size=(n_heads, 1, out_feats)))
+            self.bias = nn.Parameter(th.FloatTensor(size=(n_heads, 1, out_feats)))
         else:
             self.bias = None
 
@@ -105,7 +106,7 @@ class MultiHeadLinear(nn.Module):
         if len(x.shape) == 3:
             x = x.transpose(0, 1)
 
-        x = torch.matmul(x, self.weight)
+        x = th.matmul(x, self.weight)
         if self.bias is not None:
             x += self.bias
         return x.transpose(0, 1)
@@ -124,17 +125,17 @@ class MultiHeadBatchNorm(nn.Module):
         self._momentum = momentum
         self._affine = affine
         if affine:
-            self.weight = nn.Parameter(torch.empty(size=(n_heads, in_feats // n_heads)))
-            self.bias = nn.Parameter(torch.empty(size=(n_heads, in_feats // n_heads)))
+            self.weight = nn.Parameter(th.empty(size=(n_heads, in_feats // n_heads)))
+            self.bias = nn.Parameter(th.empty(size=(n_heads, in_feats // n_heads)))
         else:
             self.register_parameter("weight", None)
             self.register_parameter("bias", None)
 
         self.register_buffer(
-            "running_mean", torch.zeros(size=(n_heads, in_feats // n_heads))
+            "running_mean", th.zeros(size=(n_heads, in_feats // n_heads))
         )
         self.register_buffer(
-            "running_var", torch.ones(size=(n_heads, in_feats // n_heads))
+            "running_var", th.ones(size=(n_heads, in_feats // n_heads))
         )
         self.running_mean: Optional[Tensor]
         self.running_var: Optional[Tensor]
@@ -161,7 +162,7 @@ class MultiHeadBatchNorm(nn.Module):
         if bn_training:
             mean = x.mean(dim=0, keepdim=True)
             var = x.var(dim=0, unbiased=False, keepdim=True)
-            out = (x - mean) * torch.rsqrt(var + eps)
+            out = (x - mean) * th.rsqrt(var + eps)
             self.running_mean = (
                 1 - self._momentum
             ) * self.running_mean + self._momentum * mean.detach()
@@ -169,7 +170,7 @@ class MultiHeadBatchNorm(nn.Module):
                 1 - self._momentum
             ) * self.running_var + self._momentum * var.detach()
         else:
-            out = (x - self.running_mean) * torch.rsqrt(self.running_var + eps)
+            out = (x - self.running_mean) * th.rsqrt(self.running_var + eps)
         if self._affine:
             out = out * self.weight + self.bias
         return out

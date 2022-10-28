@@ -45,10 +45,10 @@ python main.py --type_model EnGCN --dataset ogbn-products --cuda_num 0 --lr 0.01
 ```
 For the different seed we need to save the `Deberta.emb` in the different place.
 The different 
-| seed0   | seed1    | seed2 | seed3   | seed4   | seed5|seed6  | seed7   | seed8 |
-|  ----  | ----  |  ---- | ----  | ----  |  ---- | ----  | ----  |  ---- |
-| 93.6449 | 93.6856| 93.6933| 93.6449 | 93.6856| 93.6933| 93.6449 | 93.6856| 93.6933|
-| 90.0622 |90.1152| 90.2959|93.6449 | 93.6856| 93.6933|93.6449 | 93.6856| 93.6933|
+|Seed | seed0   | seed1    | seed2 | seed3   | seed4   | seed5|seed6  | seed7   | seed8 | seed9 | 
+|----|  ----  | ----  |  ---- | ----  | ----  |  ---- | ----  | ----  |  ---- | ---- |
+| val_acc| 93.6449 | 93.6856| 93.6933| 93.7085| 93.6805| 93.7619| 93.7365 | 93.7314| 93.65| 93.6983|
+|test_acc | 90.0622 |90.1152| 90.2959|90.1042 | 90.0136| 90.2023|90.2997 | 90.2663| 89.9220| 90.1255|
 
 ### GLEM+GIANT+SAGN+SCR
 For **ogbn-products**

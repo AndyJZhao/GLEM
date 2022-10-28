@@ -47,9 +47,10 @@ For the different seed we need to save the `Deberta.emb` in the different place.
 The different 
 |Seed | seed0   | seed1    | seed2 | seed3   | seed4   | seed5|seed6  | seed7   | seed8 | seed9 | Mean | Std|
 |----|  ----  | ----  |  ---- | ----  | ----  |  ---- | ----  | ----  |  ---- | ---- | ---- | ---- |
-|val_acc| 93.6449 | 93.6856| 93.6933| 93.7085| 93.6805| 93.7619| 93.7365 | 93.7314| 93.65| 93.6983| 93.69909 | 0.035193| 
+|val_acc| 93.6449 | 93.6856| 93.6933| 93.7085| 93.6805| 93.7619| 93.7365 | 93.7314| 93.6500| 93.6983| 93.69909 | 0.035193| 
 |test_acc | 90.0622 |90.1152| 90.2959|90.1042 | 90.0136| 90.2023|90.2997 | 90.2663| 89.9220| 90.1255| 90.14069| 0.118869|
 
+We do not change  any setting of the `EnGCN.sh` in the [EnGCN Github](https://github.com/VITA-Group/Large_Scale_GCN_Benchmarking/blob/main/scripts/ogbn-products/EnGCN.sh) 
 ### GLEM+GIANT+SAGN+SCR
 For **ogbn-products**
 We first run the `GIANT+SAGN+SCR` model and save the prediction from it.

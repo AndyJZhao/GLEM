@@ -8,6 +8,12 @@ class EnGCNConfig(GNNConfig):
 
     def __init__(self, args=None):
         super(EnGCNConfig, self).__init__(args)
+        # This will be completed in future
+        self.model = 'EnGCN'
 
-        # No need to define any args since it's the simplest GCN and the args are defined in "GNNConfig"
+
+
+        # ! Post Init Settings
         self._post_init(args)
+
+    # *  <<<<<<<<<<<<<<<<<<<< PATH RELATED >>>>>>>>>>>>>>>>>>>>

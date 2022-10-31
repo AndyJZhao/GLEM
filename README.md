@@ -34,7 +34,7 @@ Performance on **ogbn-products**(10 runs):
 
 
 ## Citation
-Our paper:
+If you find our work useful, please consider citing our work:
 ```
 @article{zhao2022glem,
   title={Node Feature Extraction by Self-Supervised Multi-scale Neighborhood Prediction},

@@ -28,7 +28,7 @@ Performance on **ogbn-arxiv**(10 runs):
 Performance on **ogbn-products**(10 runs):
 | Methods   | Validation accuracy  | Test accuracy  |
 |  ----  | ----  |  ---- |
-| GLEM+EnGCN|0.9326 ± 0.0009 | 0.8986 ± 0.0006 |
+| GLEM+EnGCN|0.9370 ± 0.0004 | 0.9014 ± 0.0012 |
 | GLEM+GIANT-XRT+SAGN+SCR| 0.9400 ± 0.0003 | 0.8736 ± 0.0007 |
 | GLEM+GAMLP| 0.9419 ± 0.0001 | 0.8509 ± 0.0021 |
 

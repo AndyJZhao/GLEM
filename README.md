@@ -36,5 +36,11 @@ Performance on **ogbn-products**(10 runs):
 ## Citation
 Our paper:
 ```
+@article{zhao2022glem,
+  title={Node Feature Extraction by Self-Supervised Multi-scale Neighborhood Prediction},
+  author={Jianan Zhao and Meng Qu and Chaozhuo Li and Hao Yan and Qian Liu and Rui Li and Xing Xie and Jian Tang},
+  journal={arXiv preprint arXiv:2210.14709},
+  year={2022}
+}
 ```
 The different models used for different datasets are referenced in the corresponding OGB subfolders

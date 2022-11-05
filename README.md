@@ -1,4 +1,4 @@
-# LEARNING ON LARGE-SCALE TEXT-ATTRIBUTED GRAPHS VIA VARIATIONAL INFERENCE
+# Learning on Large-scale Text-attributed Graphs via Variational Inference
 This repository is the official implementation of **GLEM** - [Learning on Large-scale Text-attributed Graphs via Variational Inference](https://arxiv.org/abs/2210.14709). Majority of the work is completed during Jianan's internship at Microsoft Research Asia.
 
 ## Overview
@@ -37,7 +37,7 @@ Performance on **ogbn-products**(10 runs):
 If you find our work useful, please consider citing our work:
 ```
 @article{zhao2022glem,
-  title={Node Feature Extraction by Self-Supervised Multi-scale Neighborhood Prediction},
+  title={Learning on Large-scale Text-attributed Graphs via Variational Inference},
   author={Jianan Zhao and Meng Qu and Chaozhuo Li and Hao Yan and Qian Liu and Rui Li and Xing Xie and Jian Tang},
   journal={arXiv preprint arXiv:2210.14709},
   year={2022}

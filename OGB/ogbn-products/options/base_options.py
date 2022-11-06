@@ -69,6 +69,7 @@ class BaseOptions:
         )
         parser.add_argument("--cuda_num", type=int, default=0, help="GPU number")
         parser.add_argument("--LM_emb_path", type=str, default=None, help="Whether to load from the LM model")
+        parser.add_argument("--GIANT", type=str, default=None, help="GIANT-Feature to use")
         parser.add_argument("--seed", default=0, type=int)
         parser.add_argument("--num_layers", type=int, default=2)
         parser.add_argument(
@@ -193,6 +194,9 @@ class BaseOptions:
         if args.dataset == "ogbn-products":
             args.multi_label = False
             args.num_classes = 47
-            args.num_feats = 100 if args.LM_emb_path is None else 768
+            if args.LM_emb_path or args.GIANT is not None:
+                args.num_feats = 768
+            else:
+                args.num_feats = 100
 
         return args

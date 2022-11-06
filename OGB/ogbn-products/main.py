@@ -69,7 +69,10 @@ def main(args):
         trnr.mem_speed_bench()
 
     for seed in range(resume_seed, args.N_exp):
-        seed =  args.seed
+        if args.seed is not None:
+            seed = args.seed
+        else:
+            pass
         print(f"seed (which_run) = <{seed}>")
 
         args.random_seed = seed

@@ -70,7 +70,7 @@ class BaseOptions:
         parser.add_argument("--cuda_num", type=int, default=0, help="GPU number")
         parser.add_argument("--LM_emb_path", type=str, default=None, help="Whether to load from the LM model")
         parser.add_argument("--GIANT", type=str, default=None, help="GIANT-Feature to use")
-        parser.add_argument("--seed", default=0, type=int)
+        parser.add_argument("--seed", default=None, type=int)
         parser.add_argument("--num_layers", type=int, default=2)
         parser.add_argument(
             "--epochs",

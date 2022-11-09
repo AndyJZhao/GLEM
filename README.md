@@ -8,7 +8,13 @@ framework: In E-step, an LM is trained towards predicting both the gold and GNN 
 <img src="Framework.jpg" width="80%" height="80%">
 
 ## Requirements
-We use the miniconda to manage the python environment. We provide the environment.yaml to implement the environment
+- python=3.8
+- ogb=1.3.3
+- numpy>=1.19.5
+- dgl>=0.8.0
+- pytorch=1.10.2
+- pyg=2.0.3
+
 ```
 conda env create -f environment.yml
 ```
@@ -32,6 +38,10 @@ Performance on **ogbn-products**(10 runs):
 | GLEM+GIANT-XRT+SAGN+SCR| 0.9400 ± 0.0003 | 0.8736 ± 0.0007 |
 | GLEM+GAMLP| 0.9419 ± 0.0001 | 0.8509 ± 0.0021 |
 
+Performance on **ogbn-papers100M**(3 runs):
+| Methods   | Validation accuracy  | Test accuracy  |
+|  ----  | ----  |  ---- |
+| GLEM+GIANT+GAMLP+RLU |0.7354 ± 0.0001 | 0.7037 ± 0.0002 |
 
 ## Citation
 If you find our work useful, please consider citing our work:

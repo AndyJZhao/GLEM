@@ -7,16 +7,16 @@ from models.GLEM import GLEMConfig
 
 
 @time_logger
-def graph_vf_training(args):
+def train_glem(args):
     # ! Init Arguments
     cf = GLEMConfig(args).init()
     # ! Import packages
-    # Note that the assignment of GPU-ID must be specified before torch/dgl is imported.
+
     from models.GLEM.GLEM_trainer import GLEMTrainer
     GLEMTrainer(cf).glem_train()
-    return cf
+    return
 
 
 if __name__ == "__main__":
     args = GLEMConfig().parse_args()
-    graph_vf_training(args)
+    train_glem(args)

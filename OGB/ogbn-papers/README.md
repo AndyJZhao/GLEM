@@ -22,6 +22,7 @@ For the seed=0:
 python src/models/GLEM/trainGLEM.py 
 ```
 
+
 ## Node Classification Results:
 Performance on **ogbn-papers100M**(3 runs):
 | Methods   | Validation accuracy  | Test accuracy  |

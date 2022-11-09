@@ -74,7 +74,7 @@ class LMTrainer():
             trainable_params = sum(
             p.numel() for p in self.model.parameters() if p.requires_grad
         )
-            print(f"!!!!!!!!!!!!!!!!! LM Model parameters are {trainable_params}")
+            print(f" LM Model parameters are {trainable_params}")
         if cf.is_augmented:
             if cf.init_ckpt == 'PrevEM':
                 # ! Load previous LM model
@@ -88,11 +88,11 @@ class LMTrainer():
             elif cf.init_ckpt == 'EM':
                 # ! Don't Load previous Prt LM model
                 if cf.emi.iter > 0:
-                    print(f'-----------cf.emi.iter = {cf.emi.iter}, load from Prev')
+                    print(f'cf.emi.iter = {cf.emi.iter}, load from Prev')
                     self.model.load_state_dict(temp := th.load(cf.prev_lm_ckpt, map_location='cpu'))
                     del temp
                 else:
-                    print(f'-----------cf.emi.iter = {cf.emi.iter}, load from None')
+                    print(f'cf.emi.iter = {cf.emi.iter}, load from None')
                     pass
             else:
                 raise NotImplementedError(cf.init_ckpt)

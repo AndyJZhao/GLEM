@@ -37,7 +37,7 @@ python save_preds.py --out_put 'GLEM/temp/prt_gnn/products_TC/EnGCN/EnGCN/' --pr
 #### EM Phase:
 We can run the command to tune the LM model learning from the EnGCN:
 ```python
-python src/models/GraphVF/trainGVF.py --dataset=products_TC --em_order=LM-first --gnn_ce_reduction=mean --gnn_ckpt=EnGCN  --gnn_model=EnGCN  --inf_n_epochs=1 --inf_tr_n_nodes=200000 --lm_ce_reduction=mean --lm_cla_dropout=0.4 --lm_epochs=1 --lm_eq_batch_size=120 --lm_eval_patience=65308 --lm_init_ckpt=PrevEM --lm_label_smoothing_factor=0 --lm_load_best_model_at_end=T --lm_lr=3e-05 --lm_model=Deberta --lm_pl_ratio=1 --lm_pl_weight=0.05 --pl_filter=0.9 --pseudo_temp=0.2 --seed=0 --gpus=0
+python src/models/GLEM/trainGLEM.py --dataset=products_TC --em_order=LM-first --gnn_ce_reduction=mean --gnn_ckpt=EnGCN  --gnn_model=EnGCN  --inf_n_epochs=1 --inf_tr_n_nodes=200000 --lm_ce_reduction=mean --lm_cla_dropout=0.4 --lm_epochs=1 --lm_eq_batch_size=120 --lm_eval_patience=65308 --lm_init_ckpt=PrevEM --lm_label_smoothing_factor=0 --lm_load_best_model_at_end=T --lm_lr=3e-05 --lm_model=Deberta --lm_pl_ratio=1 --lm_pl_weight=0.05 --pl_filter=0.9 --pseudo_temp=0.2 --seed=0 --gpus=0
 ```
 Then we can get the 'Deberta.emb' generated from the Inference stage, we can move the emb file to the 'GLEM/OGB/ogbn-products/lm_emb/' and we can run the command to get the accuracy of the `GLEM+EnGCN`:
 ```python

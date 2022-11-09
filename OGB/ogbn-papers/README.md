@@ -19,14 +19,14 @@ Implementing environment: Tesla V100 32GB (GPU)
 For **ogbn-papers100M**
 For the seed=0:
 ``` 
-python src/models/GraphVF/trainGVF.py 
+python src/models/GLEM/trainGLEM.py 
 ```
 
 ## Node Classification Results:
 Performance on **ogbn-papers100M**(3 runs):
 | Methods   | Validation accuracy  | Test accuracy  |
 |  ----  | ----  |  ---- |
-| GLEM+GAMLP |0.7211 ± 0.0006 | 0.6891 ± 0.0012 |
+| GLEM+GIANT+GAMLP+RLU |0.7354 ± 0.0001 | 0.7037 ± 0.0002 |
 
 ## Citation
 

@@ -5,7 +5,7 @@ import utils.function as uf
 from models.GNNs.gnn_utils import *
 from models.GNNs.SAGE.model import SAGE
 from models.GNNs.SAGE.config import SAGEConfig
-from models.GraphVF.gvf_utils import *
+from models.GLEM.GLEM_utils import *
 from utils.data.datasets import *
 from utils.modules.early_stopper import EarlyStopping
 import time

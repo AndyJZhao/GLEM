@@ -222,15 +222,21 @@ def _tokenize_ogb_arxiv_datasets(d, labels, chunk_size=50000):
     assert d.ogb_name in ['ogbn-arxiv', 'ogbn-papers100M']
     print(f'Loading raw text for {d.ogb_name}')
     raw_text_path = download_url(d.raw_text_url, d.data_root)
-
+    print('d.hf_model', d.hf_model)
     tokenizer = AutoTokenizer.from_pretrained(d.hf_model)
+
+    if d.hf_model in ['gpt2','gpt2-medium','gpt2-large','gpt2-xl']:
+        print('Adding pad token')
+        tokenizer.padding_side = 'left'
+        tokenizer.pad_token = tokenizer.eos_token
+        # tokenizer.add_special_tokens({'pad_token': '[PAD]'})
     token_info = {k: np.memmap(d.info[k].path, dtype=d.info[k].type, mode='w+', shape=d.info[k].shape)
                   for k in d.token_keys}
     categories, node_ids = read_ids_and_labels(d.data_root)
     for meta_data in tqdm(pd.read_table(raw_text_path, header=None, chunksize=chunk_size, skiprows=[0])):
         text = process_raw_text_df(meta_data, node_ids, categories)
         print(text.index, text)
-        tokenized = tokenizer(text.tolist(), padding='max_length', truncation=True, max_length=512).data
+        tokenized = tokenizer(text.tolist(), padding='max_length', truncation=True, max_length=512,  return_token_type_ids=True).data
         for k in d.token_keys:
             token_info[k][text.index] = np.array(tokenized[k], dtype=d.info[k].type)
     uf.pickle_save('processed', d._processed_flag['token'])

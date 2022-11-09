@@ -1,6 +1,6 @@
 import os
 import utils.function as uf
-from models.GraphVF.gvf_utils import *
+from models.GLEM.GLEM_utils import *
 from utils.data import SeqGraph
 from utils.modules import ModelConfig, SubConfig
 from utils.settings import *
@@ -29,7 +29,7 @@ class LMConfig(ModelConfig):
         self.grad_acc_steps = 2
         self.load_best_model_at_end = 'T'
 
-        # ! GVF Training settings
+        # ! glem Training settings
         self.is_augmented = False
         self.save_folder = ''
         self.emi_file = ''
@@ -72,8 +72,8 @@ class LMConfig(ModelConfig):
             self.prt_lm_ckpt = prt_emi.lm.ckpt
             self.pl_filter = self.emi.cf.pl_filter
             if self.is_augmented:
-                # GraphVF + Pre/Cir-train Inf
-                # * Use GraphVF settings
+                # GLEM + Pre/Cir-train Inf
+                # * Use GLEM settings
                 if not self.is_inf:
                     self.pseudo_label_file = self.emi.iter_info.gnn_pred
             self.wandb_id = self.emi.cf.wandb_id
@@ -120,7 +120,7 @@ class LMConfig(ModelConfig):
 
     @property
     def model_cf_str(self):
-        return self.emi.gvf_prefix if self.mode == 'em' else self._lm.f_prefix
+        return self.emi.glem_prefix if self.mode == 'em' else self._lm.f_prefix
 
 
 # ! LM Settings
@@ -128,7 +128,13 @@ LM_SETTINGS = {}
 LM_MODEL_MAP = {
     'Deberta-large': 'Deberta',
     'TinyBert': 'Bert',
-    'RoBerta-large': 'RoBerta'
+    'Roberta-large': 'RoBerta',
+    'LinkBert-large': 'LinkBert',
+    'Bert-large': 'Bert',
+    'GPT2': 'GPT',
+    'GPT2-large': 'GPT',
+    'Electra-large': 'Electra',
+    'Electra-base': 'Electra',
 }
 
 
@@ -137,7 +143,10 @@ def get_lm_model():
 
 
 def get_lm_trainer(model):
-    from models.LMs.lm_trainer import LMTrainer
+    if model in ['GPT2','GPT2-large']:
+        from models.LMs.GPT_trainer import GPTTrainer as LMTrainer
+    else:
+        from models.LMs.lm_trainer import LMTrainer as LMTrainer
     return LMTrainer
 
 
@@ -146,7 +155,7 @@ def get_lm_config(model):
     return import_module(f'models.LMs.{model}').Config
 
 
-def get_lm_config_by_gvf_args(gvf_args):
-    Config = get_lm_config(model := gvf_args['lm_model'])
-    parsed_args = gvf_args_to_sub_module_args(gvf_args, target_prefix='lm_')
+def get_lm_config_by_glem_args(glem_args):
+    Config = get_lm_config(model := glem_args['lm_model'])
+    parsed_args = glem_args_to_sub_module_args(glem_args, target_prefix='lm_')
     return Config(parsed_args)

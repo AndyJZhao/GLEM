@@ -16,7 +16,7 @@ env_vars = {
     'WANDB_ENTITY': WANDB_ENTITY,
     'WANDB_API_KEY': WANDB_API_KEY,
     'HTOP_FILE': NV_HTOP_FILE,  # Nvidia-htop file
-    'TR': f'{PROJ_DIR}src/models/GraphVF/trainCT.py'
+    'TR': f'{PROJ_DIR}src/models/GLEM/trainCT.py'
 }
 
 server_setting_file = f'{PROJ_DIR}/shell_env.sh'

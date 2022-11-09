@@ -1,7 +1,7 @@
 from importlib import import_module
 
 import utils.function as uf
-from models.GraphVF.gvf_utils import *
+from models.GLEM.GLEM_utils import *
 from utils.data import SeqGraph
 from utils.modules import ModelConfig, SubConfig
 from utils.settings import *
@@ -22,7 +22,7 @@ class GNNConfig(ModelConfig):
         self.weight_decay = 5e-4
         self.norm = 'BN'
 
-        # ! Additional GraphVF settings
+        # ! Additional GLEM settings
         self.input_norm = 'T'
         self.emi_file = ''
         self.em_iter = 0
@@ -80,7 +80,7 @@ class GNNConfig(ModelConfig):
 
     @property
     def model_cf_str(self):
-        return self._gnn_sub_cf.f_prefix if self.emi is None else f'{self.emi.gvf_prefix}'
+        return self._gnn_sub_cf.f_prefix if self.emi is None else f'{self.emi.glem_prefix}'
 
     def _data_args_init(self):
         self.lm_md = self.em_info.lm_md
@@ -123,9 +123,9 @@ def get_gnn_config(model):
     return import_module(f'models.GNNs.{model}').Config
 
 
-def get_gnn_config_by_gvf_args(gvf_args):
-    Config = get_gnn_config(gvf_args['gnn_model'])
-    parsed_args = gvf_args_to_sub_module_args(gvf_args, target_prefix='gnn_')
+def get_gnn_config_by_glem_args(glem_args):
+    Config = get_gnn_config(glem_args['gnn_model'])
+    parsed_args = glem_args_to_sub_module_args(glem_args, target_prefix='gnn_')
     return Config(parsed_args)
 
 
@@ -144,7 +144,7 @@ def save_and_report_gnn_result(cf, pred, res):
         cf.wandb_log({f'gnn_prt_{k}': v for k, v in res.items()})
     else:
         # Save results to wandb
-        cf.wandb_log({**{f'GraphVF/GNN_{k}': v for k, v in res.items()},
+        cf.wandb_log({**{f'GLEM/GNN_{k}': v for k, v in res.items()},
                       'EM-Iter': cf.emi.end})
         cf.em_info.gnn_res_list.append(res)
     cf.log(f'\nTrain seed{cf.seed} finished\nResults: {res}\n{cf}')

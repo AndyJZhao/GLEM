@@ -17,7 +17,6 @@ from sklearn.metrics import accuracy_score
 
 import datasets
 
-
 _DESCRIPTION = """
 Accuracy is the proportion of correct predictions among the total number of cases processed. It can be computed with:
 Accuracy = (TP + TN) / (TP + TN + FP + FN)

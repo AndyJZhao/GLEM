@@ -14,4 +14,4 @@ if __name__ == "__main__":
     # ! Load data and train
     trainer = Trainer(cf=cf)
     trainer.train()
-    #trainer.eval_and_save()
+    trainer.eval_and_save()

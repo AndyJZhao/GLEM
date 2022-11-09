@@ -67,7 +67,7 @@ class trainer(object):
 
         #! load emb from LM
         if args.LM_emb_path != None:
-            self.x = torch.from_numpy(np.array(np.memmap(np.LM_emb_path, mode='r', dtype=torch.float16, shape=(2449029,768)))).to(torch.float32)
+            self.x = torch.from_numpy(np.array(np.memmap(args.LM_emb_path, mode='r', dtype=np.float16, shape=(2449029,768)))).to(torch.float32)
             print('load from GLEM:LM!')
         elif args.GIANT != None:
             self.x = torch.tensor(np.load(args.GIANT)).float()

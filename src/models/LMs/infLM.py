@@ -79,7 +79,7 @@ class LmInfTrainer:
         self.log(f'LM inference completed.\nfeature file: {self.cf.emi.lm.emb}\nPredictions file : {self.cf.emi.lm.pred}')
         if cf.emi.iter >= 0:
             # Save results to wandb
-            cf.wandb_log({**{f'GraphVF/LM_{k}': v for k, v in res.items()},
+            cf.wandb_log({**{f'GLEM/LM_{k}': v for k, v in res.items()},
                           'EM-Iter': cf.emi.end})
             cf.em_info.lm_res_list.append(res)
         else:  # Pretrain

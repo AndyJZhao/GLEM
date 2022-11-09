@@ -40,7 +40,7 @@ class SeqGraph():
         self.token_keys = ['attention_mask', 'input_ids', 'token_type_ids']
         self.ndata = {}
 
-        # * GVF-related files information
+        # * GLEM-related files information
         self._g_info_folder = init_path(f"{DATA_PATH}{cf.dataset}/")
         self._g_info_file = f"{self._g_info_folder}graph.info "
         self._token_folder = init_path(f"{DATA_PATH}{self.name}{process_mode}_{self.hf_model}/")
@@ -49,7 +49,7 @@ class SeqGraph():
             'token': f'{self._token_folder}processed.flag',
         }
         if hasattr(cf, 'ct'):  # Try to update f_info_file
-            self._ct_folder = init_path(f"{cf.emi.gvf_cfg_str}")
+            self._ct_folder = init_path(f"{cf.emi.glem_cfg_str}")
         self.g, self.split = None, None
 
         self.info = {
@@ -188,8 +188,12 @@ class SeqGraph():
     def get_tokens(self, node_id):
         # node_id = self.gi.IDs[node_id] if hasattr(self.gi, 'IDs') else node_id
         _load = lambda k: th.IntTensor(np.array(self.ndata[k][node_id]))
-        item = {k: _load(k) for k in self.token_keys if k != 'input_ids'}
+        # item = {k: _load(k) for k in self.token_keys if k != 'input_ids'}
+        item = {}
+        item['attention_mask'] = _load('attention_mask')
         item['input_ids'] = th.IntTensor(np.array(self['input_ids'][node_id]).astype(np.int32))
+        if self.hf_model not in ['distilbert-base-uncased','roberta-base']:
+            item['token_type_ids'] = _load('token_type_ids')
         return item
 
 

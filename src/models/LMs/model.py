@@ -4,7 +4,7 @@ from transformers import PreTrainedModel
 from transformers.modeling_outputs import TokenClassifierOutput
 
 from utils.function.os_utils import init_random_state
-from models.GraphVF.gvf_utils import compute_loss
+from models.GLEM.GLEM_utils import compute_loss
 import numpy as np
 import torch.nn.functional as F
 
@@ -40,10 +40,6 @@ class BertClassifier(PreTrainedModel):
         # print(f'{sum(is_gold)} gold, {sum(~is_gold)} pseudo')
         loss = compute_loss(logits, labels, self.loss_func, is_gold=is_gold, pl_weight=self.pl_weight, is_augmented=self.is_augmented)
         return TokenClassifierOutput(loss=loss, logits=logits)
-
-    # def save_pretrained(self, output_dir, state_dict):
-    #     # Save bert-encoder only
-    #     return self.bert_encoder.save_pretrained(output_dir, state_dict=state_dict, save_config=True)
 
 
 class BertEmbInfModel(PreTrainedModel):

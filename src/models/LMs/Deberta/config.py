@@ -48,7 +48,7 @@ class DeBERTaConfig(LMConfig):
                 prt_lm={  # Initial LM configs
                     'arxiv': SN(
                         model='FtV1',
-                        cmd='--lr=1e-05 --eq_batch_size=36 --weight_decay=0.01 --dropout=0.1 --att_dropout=0.1 --cla_dropout=0.1 --cla_bias=T --epochs=4 --warmup_epochs=0.2 --eval_patience=50000',
+                        cmd='--lr=2e-05 --eq_batch_size=72  --dropout=0.1 --att_dropout=0.1 --cla_dropout=0.1 --cla_bias=T --epochs=4 --warmup_epochs=1 --eval_patience=50000',
                         max_n_gpus=4,
                     ),
                     'products': SN(

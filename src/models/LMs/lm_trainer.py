@@ -4,12 +4,18 @@ from datasets import load_metric
 from transformers import AutoModel, EvalPrediction, TrainingArguments, Trainer
 import utils.function as uf
 from models.LMs.model import *
-from models.GraphVF.gvf_utils import *
+from models.GLEM.GLEM_utils import *
 from utils.data.datasets import *
 import torch as th
 
 METRICS = {  # metric -> metric_path
-    'accuracy': 'src/utils/function/hf_accuracy.py'
+    'accuracy': 'src/utils/function/hf_accuracy.py',
+    'f1score': 'src/utils/function/hf_f1.py',
+    'precision': 'src/utils/function/hf_precision.py',
+    'recall': 'src/utils/function/hf_recall.py',
+    'spearmanr': 'src/utils/function/hf_spearmanr.py',
+    'pearsonr': 'src/utils/function/hf_pearsonr.py',
+
 }
 
 
@@ -93,8 +99,13 @@ class LMTrainer():
             load_best_model_at_end = cf.load_best_model_at_end == 'T'
         else:
             load_best_model_at_end = True
-        self.model.config.hidden_dropout_prob = cf.dropout
-        self.model.config.attention_dropout_prob = cf.att_dropout
+        if cf.hf_model == 'distilbert-base-uncased':
+            self.model.config.dropout = cf.dropout
+            self.model.config.attention_dropout = cf.att_dropout
+        else:
+            print('default dropout and attention_dropout are:', self.model.config.hidden_dropout_prob, self.model.config.attention_probs_dropout_prob)
+            self.model.config.hidden_dropout_prob = cf.dropout
+            self.model.config.attention_probs_dropout_prob = cf.att_dropout
 
         training_args = TrainingArguments(
             output_dir=cf.out_dir,
@@ -107,21 +118,24 @@ class LMTrainer():
             save_total_limit=1,
             report_to='wandb' if cf.wandb_on else None,
             per_device_train_batch_size=cf.batch_size,
-            per_device_eval_batch_size=cf.batch_size * 10,
+            per_device_eval_batch_size=cf.batch_size * 6 if cf.hf_model in {'distilbert-base-uncased', 'google/electra-base-discriminator'} else cf.batch_size * 10,
             warmup_steps=warmup_steps,
             disable_tqdm=False,
             dataloader_drop_last=True,
             num_train_epochs=cf.epochs,
             local_rank=cf.local_rank,
-            dataloader_num_workers=0,
+            dataloader_num_workers=1,
             fp16=True,  # if cf.hf_model=='microsoft/deberta-large' else False
         )
 
-        # ! Get dataloader
 
         def compute_metrics(pred: EvalPrediction):
             predictions, references = pred.predictions.argmax(1), pred.label_ids.argmax(1)
-            return {m_name: metric.compute(predictions=predictions, references=references) for m_name, metric in self.metrics.items()}
+            return {m_name: metric.compute(predictions=predictions, references=references)
+            if m_name in {'accuracy', 'pearsonr', 'spearmanr'} else metric.compute(predictions=predictions, references=references, average='macro')
+            for m_name, metric in self.metrics.items()}
+
+
 
         self.trainer = Trainer(
             model=self.model,
@@ -151,7 +165,7 @@ class LMTrainer():
         res = {**get_metric('valid'), **get_metric('test')}
         res = {'val_acc': res['valid_accuracy'], 'test_acc': res['test_accuracy']}
         if cf.is_augmented:
-            cf.wandb_log({**{f'GraphVF/LM_{k}': v for k, v in res.items()},
+            cf.wandb_log({**{f'GLEM/LM_{k}': v for k, v in res.items()},
                           'EM-Iter': cf.emi.end})
             cf.em_info.lm_res_list.append(res)
             uf.pickle_save(cf.em_info, cf.emi_file)

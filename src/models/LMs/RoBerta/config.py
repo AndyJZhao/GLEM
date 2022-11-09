@@ -5,7 +5,7 @@ class RoBERTaConfig(LMConfig):
 
     def __init__(self, args=None):
         super(RoBERTaConfig, self).__init__(args)
-        self.model = 'Deberta'
+        self.model = 'RoBerta'
         self._post_init(args)
 
     para_prefix = {**LMConfig.para_prefix}
@@ -16,7 +16,7 @@ class RoBERTaConfig(LMConfig):
                 hf_model='roberta-base',
                 hidden_dim=768,
                 max_bsz=SN(  # Batch size for different device
-                    train={12: 8, 16: 12, 24: 9, 32: 18, 40: 18, 70: 48},
+                    train={12: 8, 16: 12, 24: 9, 32: 30, 40: 18, 70: 48},
                     inf={12: 150, 16: 200, 24: 150, 32: 512, 40: 300, 70: 560},
                 ),
                 prt_lm={  # Initial LM configs
@@ -37,9 +37,10 @@ class RoBERTaConfig(LMConfig):
                     )
                 },
             ),
-        'roberta-large':
+        'Roberta-large':
             SN(
-                hf_model='microsoft/deberta-larges',
+                hf_model='roberta-large',
+                hidden_dim=1024,
                 max_bsz=SN(  # Batch size for different device
                     train={12: 6, 16: 10, 24: 16, 32: 18},
                     inf={12: 150, 16: 200, 24: 150, 32: 250},
@@ -57,3 +58,4 @@ class RoBERTaConfig(LMConfig):
 
             ),
     }
+

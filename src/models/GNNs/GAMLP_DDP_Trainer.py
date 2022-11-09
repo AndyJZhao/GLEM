@@ -6,7 +6,7 @@ from ogb.nodeproppred import Evaluator
 from models.GNNs.GAMLP_DDP.model import R_GAMLP_RLU
 from models.GNNs.GAMLP_DDP.config import GAMLP_DDP_Config
 from models.GNNs.gnn_utils import *
-from models.GraphVF.gvf_utils import *
+from models.GLEM.GLEM_utils import *
 from utils.data.datasets import *
 from utils.modules.early_stopper import EarlyStopping
 import torch.distributed as dist

@@ -69,7 +69,7 @@ python save_preds --out_put  PROJ_DIR/temp/prt_gnn/products_TC/SAGN/GIANT_SAGN_S
 
 After that, we can run the command as follows:
 ``` 
-python src/models/GraphVF/trainGVF.py 
+python src/models/GLEM/trainGLEM.py 
 ```
 
 ## Node Classification Results:

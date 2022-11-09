@@ -4,7 +4,7 @@ import utils.function as uf
 from models.GNNs.gnn_utils import *
 from models.GNNs.GCN.model import GCN
 from models.GNNs.RevGAT.model import RevGAT
-from models.GraphVF.gvf_utils import *
+from models.GLEM.GLEM_utils import *
 from models.GNNs.gnn_utils import *
 from utils.data.datasets import *
 from utils.data.preprocess import *

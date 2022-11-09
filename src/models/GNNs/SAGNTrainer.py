@@ -5,7 +5,7 @@ from models.GNNs.SAGN.model import SAGN,SLEModel,EMA
 from models.GNNs.SAGN.utils.layer import GroupMLP
 from models.GNNs.SAGN.config import SAGN_Config
 from models.GNNs.gnn_utils import *
-from models.GraphVF.gvf_utils import *
+from models.GLEM.GLEM_utils import *
 from utils.data.datasets import *
 from utils.modules.early_stopper import EarlyStopping
 from utils.data.preprocess import *

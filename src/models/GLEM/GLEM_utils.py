@@ -39,8 +39,8 @@ class EmIterInfo:
             else:
                 gnn_folder = f'{gnn_root}{self.cf.gnn_model}/{em_info.lm.model}/{em_info.gnn_cfg_str}/'
         else:
-            gnn_root = f'{TEMP_PATH}gvf_gnn/{cf.dataset}/'
-            gnn_folder = f'{gnn_root}{em_info.gvf_cfg_str}/'
+            gnn_root = f'{TEMP_PATH}glem_gnn/{cf.dataset}/'
+            gnn_folder = f'{gnn_root}{em_info.glem_cfg_str}/'
         self.gnn = SN(folder=gnn_folder, pred=f'{gnn_folder}.pred',
                       result=f'{gnn_folder}.result')
 
@@ -49,8 +49,8 @@ class EmIterInfo:
             lm_root = f'{MNT_TEMP_DIR}prt_lm/{cf.dataset}/'
             lm_folder = f'{lm_root}{self.cf.lm_model}/{ilm.model}/'
         else:
-            lm_root = f'{TEMP_PATH}gvf_lm/{cf.dataset}/'
-            lm_folder = f'{lm_root}{em_info.gvf_cfg_str}/'
+            lm_root = f'{TEMP_PATH}glem_lm/{cf.dataset}/'
+            lm_folder = f'{lm_root}{em_info.glem_cfg_str}/'
         self.lm = get_lm_info(lm_folder, self.cf.lm_model)
 
         # ! EM Info contains GNN feature, GNN target, LM target types
@@ -100,7 +100,7 @@ class EmIterInfo:
         return tr_range, pl_range
 
 
-def gvf_args_to_sub_module_args(gvf_args_dict, target_prefix='gnn_'):
+def glem_args_to_sub_module_args(glem_args_dict, target_prefix='gnn_'):
     # Ignore other settings
     ignored = [_ for _ in ['gnn_', 'lm_'] if _ != target_prefix]
     # Rename target_prefix
@@ -108,9 +108,9 @@ def gvf_args_to_sub_module_args(gvf_args_dict, target_prefix='gnn_'):
     cf_rename = lambda k: k.split(target_prefix)[1] if target_prefix in k and target_prefix != '' else k
 
     sub_module_dict = {}
-    for k, v in gvf_args_dict.items():
+    for k, v in glem_args_dict.items():
         if keep_arg(k):
-            if f'{target_prefix}{k}' in gvf_args_dict:
+            if f'{target_prefix}{k}' in glem_args_dict:
                 # Overwrite existing ct-configs if defined in submodule config
                 # e.g. lm_model should overwrite the model attribute of ct
                 print()

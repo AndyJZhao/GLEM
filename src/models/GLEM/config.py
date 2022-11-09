@@ -1,14 +1,14 @@
 from models.GNNs.gnn_utils import *
 from models.LMs.lm_utils import *
-from models.GraphVF.gvf_utils import *
+from models.GLEM.GLEM_utils import *
 from utils.data import SeqGraph
 from utils.modules.conf_utils import *
 
 
-class GraphVFConfig(ModelConfig):
+class GLEMConfig(ModelConfig):
 
     def __init__(self, args=None):
-        super(GraphVFConfig, self).__init__('GraphVF')
+        super(GLEMConfig, self).__init__('GLEM')
         # ! Circular Training settings
         self.inf_n_epochs = 1
         self.inf_tr_n_nodes = 200000
@@ -40,8 +40,8 @@ class GraphVFConfig(ModelConfig):
                 self.device = th.device("cuda:0")
         else:  # CPU
             self.device = th.device('cpu')
-        lm_cf = get_lm_config_by_gvf_args(self.model_conf)
-        gnn_cf = get_gnn_config_by_gvf_args(self.model_conf)
+        lm_cf = get_lm_config_by_glem_args(self.model_conf)
+        gnn_cf = get_gnn_config_by_glem_args(self.model_conf)
 
         self.lm = SubConfig(lm_cf, lm_cf.para_prefix)
         self.lm_md = lm_cf.md
@@ -56,8 +56,8 @@ class GraphVFConfig(ModelConfig):
             n_pl_nodes -= len(g_info.splits['test_x'])
         # ! Save EM Info to file
         self.em_info = em_info = SN(
-            gvf_prefix=self.f_prefix,
-            gvf_cfg_str=self.model_cf_str,
+            glem_prefix=self.f_prefix,
+            glem_cfg_str=self.model_cf_str,
             wandb_id=self.wandb_id,
             gnn_cfg_str=self.gnn.f_prefix,
             cf=self.model_conf,
@@ -81,7 +81,7 @@ class GraphVFConfig(ModelConfig):
         Parse intermediate settings that shan't be saved or printed.
         """
         self.inf_stride = 1 / self.em_n_iter_per_epoch
-        self.em_phase = 'GVF-Main-Loop'
+        self.em_phase = 'GLEM-Main-Loop'
         SRC = 'src/models/'
         self.gnn_tr_prefix = f'{PYTHON} {SRC}GNNs/trainGNN.py'
         self.lm_tr_prefix = f'{PYTHON} {SRC}LMs/trainLM.py'
@@ -112,8 +112,8 @@ class GraphVFConfig(ModelConfig):
         defined_args.emi_file = ''
 
         # ! Reinitialize config by parsed experimental args
-        lm_cf = get_lm_config_by_gvf_args(defined_args.__dict__)
-        gnn_cf = get_gnn_config_by_gvf_args(defined_args.__dict__)
+        lm_cf = get_lm_config_by_glem_args(defined_args.__dict__)
+        gnn_cf = get_gnn_config_by_glem_args(defined_args.__dict__)
         add_undefined_args_to_parser(parser, self.model_conf, defined_args, '')
         for conf, prefix in [(lm_cf, 'lm_'), (gnn_cf, 'gnn_')]:
             add_undefined_args_to_parser(parser, conf.model_conf, defined_args, prefix, valid_args_list=conf.args_to_parse)

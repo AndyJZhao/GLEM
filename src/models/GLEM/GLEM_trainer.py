@@ -4,13 +4,13 @@ from datasets import load_metric
 
 from models.LMs.lm_utils import *
 from models.GNNs.gnn_utils import *
-from models.GraphVF.gvf_utils import *
+from models.GLEM.GLEM_utils import *
 import torch as th
 
 metric = load_metric('src/utils/function/hf_accuracy.py')
 
 
-class GVFTrainer():
+class GLEMTrainer():
     """Convert textural graph to text list"""
 
     def __init__(self, cf):
@@ -62,7 +62,7 @@ class GVFTrainer():
         else:
             self.log(f'\n <<<<<<<<<< LM-Pre-train Inference >>>>>>>>>>')
             self._inf_lm()
-        prt_res = {f'GraphVF/LM_{k}': v
+        prt_res = {f'GLEM/LM_{k}': v
                    for k, v in uf.pickle_load(prt_emi.lm.result).items()}
         self.cf.wandb_log({**prt_res, 'EM-Iter': 0}, log=True)
 
@@ -88,7 +88,7 @@ class GVFTrainer():
             cmd.replace(f'--wandb_id={self.cf.wandb_id}', f' -wGNN_Prt_{self.cf.dataset[:4]}')
             self.run_gnn_cmd(cmd)
 
-        prt_res = {f'GraphVF/GNN_{k}': v
+        prt_res = {f'GLEM/GNN_{k}': v
                    for k, v in uf.pickle_load(prt_emi.gnn.result).items()}
         self.cf.wandb_log({**prt_res, 'EM-Iter': 0}, log=True)
 
@@ -127,12 +127,12 @@ class GVFTrainer():
         em_info = uf.pickle_load(self.cf.emi_file)
         res_data = {**get_best_by_val_acc(em_info.gnn_res_list, 'gnn'), **get_best_by_val_acc(em_info.lm_res_list, 'lm')}
         self.logger.save(res_data)
-        self.logger.log(f'GVF-Training completed!\n{res_data}')
+        self.logger.log(f'GLEM-Training completed!\n{res_data}')
         # # ! Remove temp files
         # uf.silent_remove(self.cur_emi.gnn.folder)
         # uf.silent_remove(self.cur_emi.lm.folder)
 
-    def gvf_train(self):
+    def glem_train(self):
         self._pre_train_lm()  # Get LM emb + pred
         self._pre_train_gnn()  # Get GNN pred (OGB)
         for self.em_iter in self.em_range:

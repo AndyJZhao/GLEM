@@ -41,7 +41,7 @@ Performance on **ogbn-products**(10 runs):
 Performance on **ogbn-papers100M**(3 runs):
 | Methods   | Validation accuracy  | Test accuracy  |
 |  ----  | ----  |  ---- |
-| GLEM+GIANT+GAMLP+RLU |0.7354 ± 0.0001 | 0.7037 ± 0.0002 |
+| GLEM+GIANT+GAMLP |0.7354 ± 0.0001 | 0.7037 ± 0.0002 |
 
 ## Citation
 If you find our work useful, please consider citing our work:

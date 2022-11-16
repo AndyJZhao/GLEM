@@ -18,7 +18,7 @@ class BaseOptions:
         parser.add_argument(
             "--dataset",
             type=str,
-            default="Products",
+            default="ogbn-arxiv",
             required=False,
             help="The input dataset.",
             choices=[
@@ -35,30 +35,20 @@ class BaseOptions:
         parser.add_argument(
             "--type_model",
             type=str,
-            default="DST-GCN",
+            default='EnGCN',
             choices=[
                 "GraphSAGE",
                 "FastGCN",
                 "LADIES",
                 "ClusterGCN",
                 "GraphSAINT",
-                "DST-GCN",
-                "MLP",
                 "SGC",
                 "SIGN",
                 "SIGN_MLP",
                 "LP_Adj",
-                "EdgeSampling",
-                "GradientSampling",
                 "SAGN",
                 "GAMLP",
-                "Bagging",
-                "SAdaGCN",
-                "AdaGCN",
-                "AdaGCN_CandS",
-                "AdaGCN_SLE",
                 "EnGCN",
-                "GBGCN",
             ],
         )
         parser.add_argument("--exp_name", type=str, default="")
@@ -105,7 +95,7 @@ class BaseOptions:
             type=int,
             default=5000,
             help="batch size depending on methods, "
-            "need to provide fair batch for different approaches",
+                 "need to provide fair batch for different approaches",
         )
         # parameters for GraphSAINT
         parser.add_argument(
@@ -186,7 +176,6 @@ class BaseOptions:
         args = parser.parse_args()
         args = self.reset_dataset_dependent_parameters(args)
 
-
         return args
 
     # setting the common hyperparameters used for comparing different methods of a trick
@@ -198,5 +187,12 @@ class BaseOptions:
                 args.num_feats = 768
             else:
                 args.num_feats = 100
+        elif args.dataset == "ogbn-arxiv":
+            args.num_classes = 40
+            args.N_nodes = 169343
+            if args.LM_emb_path or args.GIANT is not None:
+                args.num_feats = 768
+            else:
+                args.num_feats = 128
 
         return args

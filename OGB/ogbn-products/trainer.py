@@ -6,7 +6,7 @@ import torch
 import torch_geometric.datasets
 from sklearn.metrics import f1_score
 from torch.profiler import ProfilerActivity, profile
-from torch_geometric.transforms import ToSparseTensor
+from torch_geometric.transforms import ToSparseTensor, ToUndirected
 from Precomputing.Ensembling.EnGCN import EnGCN
 
 def load_data(dataset_name, to_sparse=True):
@@ -15,6 +15,8 @@ def load_data(dataset_name, to_sparse=True):
             os.path.dirname(os.path.realpath(__file__)), "..", "dataset", dataset_name
         )
         T = ToSparseTensor() if to_sparse else lambda x: x
+        if to_sparse and dataset_name == "ogbn-arxiv":
+            T = lambda x: ToSparseTensor()(ToUndirected()(x))
         dataset = PygNodePropPredDataset(name=dataset_name, root=root, transform=T)
         processed_dir = dataset.processed_dir
         split_idx = dataset.get_idx_split()
@@ -67,7 +69,7 @@ class trainer(object):
 
         #! load emb from LM
         if args.LM_emb_path != None:
-            self.x = torch.from_numpy(np.array(np.memmap(args.LM_emb_path, mode='r', dtype=np.float16, shape=(2449029,768)))).to(torch.float32)
+            self.x = torch.from_numpy(np.array(np.memmap(args.LM_emb_path, mode='r', dtype=np.float16, shape=(169343,768)))).to(torch.float32)
             print('load from GLEM:LM!')
         elif args.GIANT != None:
             self.x = torch.tensor(np.load(args.GIANT)).float()

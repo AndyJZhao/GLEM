@@ -1,5 +1,5 @@
 # Learning on Large-scale Text-attributed Graphs via Variational Inference
-This repository is the official implementation of **GLEM** - [Learning on Large-scale Text-attributed Graphs via Variational Inference](https://arxiv.org/abs/2210.14709). Majority of the work is completed during Jianan's internship at Microsoft Research Asia.
+This repository is the official implementation of **GLEM** - [Learning on Large-scale Text-attributed Graphs via Variational Inference]. Majority of the work is completed during Jianan's internship at Microsoft Research Asia.
 
 ## Overview
 The proposed GLEM framework trains GNN and LM separately in a variational EM
@@ -41,7 +41,7 @@ Performance on **ogbn-products**(10 runs):
 Performance on **ogbn-papers100M**(3 runs):
 | Methods   | Validation accuracy  | Test accuracy  |
 |  ----  | ----  |  ---- |
-| GLEM+GIANT+GAMLP+RLU |0.7354 ± 0.0001 | 0.7037 ± 0.0002 |
+| GLEM+GIANT+GAMLP |0.7354 ± 0.0001 | 0.7037 ± 0.0002 |
 
 ## Citation
 If you find our work useful, please consider citing our work:

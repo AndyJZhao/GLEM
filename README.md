@@ -27,9 +27,10 @@ Please look the details in Readme.md of each dataset inside the OGB folder.
 Performance on **ogbn-arxiv**(10 runs):
 | Methods   | Validation accuracy  | Test accuracy  |
 |  ----  | ----  |  ---- |
-| GLEM+RevGAT|0.7749 ± 0.0017 | 0.7697± 0.0019 |
-| GLEM+GAMLP |0.7695 ± 0.0014 | 0.7562± 0.0023 |
-| GLEM+GCN   |0.7686 ± 0.0019 | 0.7593± 0.0019 |
+| GLEM+EnGCN |0.8017 ± 0.0007 | 0.7966 ± 0.0006 |
+| GLEM+RevGAT|0.7749 ± 0.0017 | 0.7697 ± 0.0019 |
+| GLEM+GAMLP |0.7695 ± 0.0014 | 0.7562 ± 0.0023 |
+| GLEM+GCN   |0.7686 ± 0.0019 | 0.7593 ± 0.0019 |
 
 Performance on **ogbn-products**(10 runs):
 | Methods   | Validation accuracy  | Test accuracy  |

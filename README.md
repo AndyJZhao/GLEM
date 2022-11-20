@@ -3,7 +3,7 @@ This repository is the official implementation of **GLEM** - [Learning on Large-
 
 ## Overview
 The proposed GLEM framework trains GNN and LM separately in a variational EM
-framework: In E-step, an LM is trained towards predicting both the gold and GNN predicted pseudolabels; In M-step, a GNN is trained by predicting LM-inferenced pseudo-labels using the embeddings and labels predicted by LM.
+framework: In E-step, an LM is trained towards predicting both the gold and GNN predicted pseudolabels; In M-step, a GNN is trained by predicting both the gold and GNN predicted pseudolabels.
   
 <img src="Framework.jpg" width="80%" height="80%">
 
@@ -46,4 +46,10 @@ Performance on **ogbn-papers100M**(3 runs):
 
 ## Citation
 If you find our work useful, please consider citing our work:
+@article{zhao2022glem,
+  title={Learning on Large-scale Text-attributed Graphs via Variational Inference},
+  author={Jianan Zhao and Meng Qu and Chaozhuo Li and Hao Yan and Qian Liu and Rui Li and Xing Xie and Jian Tang},
+  journal={arXiv preprint arXiv:2210.14709},
+  year={2022}
+}
 The different models used for different datasets are referenced in the corresponding OGB subfolders

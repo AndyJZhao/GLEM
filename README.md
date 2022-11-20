@@ -15,6 +15,7 @@ framework: In E-step, an LM is trained towards predicting both the gold and GNN 
 - pytorch=1.10.2
 - pyg=2.0.3
 
+To use our exact environment, one may install the environment by the following command:
 ```
 conda env create -f environment.yml
 ```

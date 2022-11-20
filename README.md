@@ -50,10 +50,14 @@ Performance on **ogbn-papers100M**(3 runs):
 
 ## Citation
 If you find our work useful, please consider citing our work:
+
+```
 @article{zhao2022glem,
   title={Learning on Large-scale Text-attributed Graphs via Variational Inference},
   author={Jianan Zhao and Meng Qu and Chaozhuo Li and Hao Yan and Qian Liu and Rui Li and Xing Xie and Jian Tang},
   journal={arXiv preprint arXiv:2210.14709},
   year={2022}
 }
+```
+
 The different models used for different datasets are referenced in the corresponding OGB subfolders

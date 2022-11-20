@@ -8,6 +8,9 @@ framework: In E-step, an LM is trained towards predicting both the gold and GNN 
 <img src="Framework.jpg" width="80%" height="80%">
 
 ## Requirements
+
+The core packages are as below:
+
 - python=3.8
 - ogb=1.3.3
 - numpy>=1.19.5

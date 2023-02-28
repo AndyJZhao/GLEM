@@ -108,8 +108,6 @@ def get_gnn_trainer(model):
         from models.GNNs.minibatch_trainer import BatchGNNTrainer as GNNTrainer
     elif model in ['SAGN']:
         from models.GNNs.SAGNTrainer import SAGN_Trainer as GNNTrainer
-    elif model in ['EnGCN']:
-        from models.GNNs.EnGCNTrainer import EnGCNTrainer as GNNTrainer
     elif model in ['GAMLP']:
         from models.GNNs.GAMLPTrainer import GAMLP_Trainer as GNNTrainer
     elif model in ['GAMLP_DDP']:

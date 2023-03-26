@@ -42,7 +42,6 @@ python src/models/GLEM/trainGLEM.py
 Performance on **ogbn-products**(10 runs):
 | Methods   | Validation accuracy  | Test accuracy  |
 |  ----  | ----  |  ---- |
-| GLEM+EnGCN|0.9370 ± 0.0004 | 0.9014 ± 0.0012 |
 | GLEM+GIANT+SAGN+SCR |0.9400 ± 0.0003 | 0.8737 ± 0.0006 |
 
 ## Citation

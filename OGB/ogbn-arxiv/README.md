@@ -31,7 +31,6 @@ Then we can get the 'Deberta.emb' generated from the Inference stage, we can mov
 ```python
 python main.py --type_model EnGCN --dataset ogbn-arxiv --cuda_num 0 --lr 0.001 --weight_decay 0.0001 --dropout 0.1 --epochs 100 --dim_hidden 512 --num_layers 8 --use_batch_norm False --batch_size 10000 --SLE_threshold 0.5 --N_exp 10 --tosparse --LM_emb_path 'GLEM/OGB/ogbn-arxiv/lm_emb/Deberta.emb'
 ```
-Note that we follow the same experiment's config in 'EnGCN'.
 
 ### GLEM+GAMLP
 For **ogbn-arxiv**

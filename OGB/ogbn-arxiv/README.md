@@ -22,16 +22,6 @@ python src/models/GLEM/trainGLEM.py --dataset=arxiv_TA --em_order=LM-first --gnn
 ```
 The `inf_n_epochs` controls the number of iterations of the `EM-Step`, which on ogbn-arxiv generally converges at iteration=1, with gnn_val accuracy reaching its maximum.
 
-#### EM Phase:
-We can run the command to tune the LM model learning from the EnGCN:
-```python
-python src/models/GLEM/trainGLEM.py --dataset=arxiv_TA --em_order=LM-first --gnn_ckpt=EnGCN --gnn_epochs=400 --gnn_model=EnGCN --inf_n_epochs=1 --inf_tr_n_nodes=200000 --lm_ce_reduction=mean --lm_cla_dropout=0.4 --lm_epochs=1 --lm_eq_batch_size=60 --lm_eval_patience=65308 --lm_init_ckpt=PrevEM --lm_label_smoothing_factor=0 --lm_load_best_model_at_end=T --lm_lr=2e-07 --lm_model=Deberta --lm_pl_ratio=0.1 --lm_pl_weight=0.1 --pseudo_temp=0.5 --gpus=0
-```
-Then we can get the 'Deberta.emb' generated from the Inference stage, we can move the emb file to the 'GLEM/OGB/ogbn-arxiv/lm_emb/' and we can run the command to get the accuracy of the `GLEM+EnGCN`:
-```python
-python main.py --type_model EnGCN --dataset ogbn-arxiv --cuda_num 0 --lr 0.001 --weight_decay 0.0001 --dropout 0.1 --epochs 100 --dim_hidden 512 --num_layers 8 --use_batch_norm False --batch_size 10000 --SLE_threshold 0.5 --N_exp 10 --tosparse --LM_emb_path 'GLEM/OGB/ogbn-arxiv/lm_emb/Deberta.emb'
-```
-
 ### GLEM+GAMLP
 For **ogbn-arxiv**
 For the seed:0:

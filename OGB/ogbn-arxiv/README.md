@@ -22,19 +22,6 @@ python src/models/GLEM/trainGLEM.py --dataset=arxiv_TA --em_order=LM-first --gnn
 ```
 The `inf_n_epochs` controls the number of iterations of the `EM-Step`, which on ogbn-arxiv generally converges at iteration=1, with gnn_val accuracy reaching its maximum.
 
-### GLEM+EnGCN
-For the `GLEM+EnGCN`, you will need to implement some special library in the [EnGCN](https://github.com/VITA-Group/Large_Scale_GCN_Benchmarking)
-For **ogbn-arxiv**
-#### PreTrain Phase
-If you have the `Deberta.emb` pretrained from our framework in the `GLEM/temp/prt_lm/arxiv_TA/Deberta/Ftv1/Deberta.emb`, you can run the command as follows to get the `preds` from the EnGCN:
-```python
-python main.py --type_model EnGCN --dataset ogbn-arxiv --cuda_num 0 --lr 0.001 --weight_decay 0.0001 --dropout 0.1 --epochs 100 --dim_hidden 512 --num_layers 8 --use_batch_norm False --batch_size 10000 --SLE_threshold 0.5 --N_exp 1 --tosparse  --LM_emb_path 'GLEM/temp/prt_lm/arxiv_TA/Deberta/Ftv1/Deberta.emb'
-```
-The preds will be saved in the `GLEM/OGB/ogbn-arxiv/output/ogbn-arxiv/` and the name is composed of the uuex format(you can rename it as EnGCN.pt)
-Then you can move to the 'GLEM/src/utils/function/', and run the command as follows to save the `preds` from the EnGCN:
-```python
-python save_preds.py --out_put 'GLEM/temp/prt_gnn/arxiv_TA/EnGCN/EnGCN/' --pred_path 'GLEM/OGB/ogbn-arxiv/output/ogbn-arxiv/EnGCN.pt'
-```
 #### EM Phase:
 We can run the command to tune the LM model learning from the EnGCN:
 ```python
@@ -62,7 +49,6 @@ python src/models/GLEM/trainGLEM.py --dataset=arxiv_TA --em_order=GNN-first --gn
 Performance on **ogbn-arxiv**(10 runs):
 | Methods   | Validation accuracy  | Test accuracy  |
 |  ----  | ----  |  ---- |
-| GLEM+EnGCN |0.8017 ± 0.0007 | 0.7966 ± 0.0006 |
 | GLEM+RevGAT|0.7749 ± 0.0017 | 0.7697 ± 0.0019 |
 | GLEM+GAMLP |0.7695 ± 0.0014 | 0.7562 ± 0.0023 |
 | GLEM+GCN   |0.7686 ± 0.0019 | 0.7593 ± 0.0019 |
@@ -72,16 +58,6 @@ Our paper:
 ```
 
 ```
-EnGCN paper:
-```
-@article{duan2022comprehensive,
-  title={A Comprehensive Study on Large-Scale Graph Training: Benchmarking and Rethinking},
-  author={Duan, Keyu and Liu, Zirui and Wang, Peihao and Zheng, Wenqing and Zhou, Kaixiong and Chen, Tianlong and Hu, Xia and Wang, Zhangyang},
-  journal={arXiv preprint arXiv:2210.07494},
-  year={2022}
-}
-```
-
 RevGAT paper:
 ```
 @InProceedings{li2021gnn1000,
